@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Interpreter.Memory
+namespace Interpreter.Core
 {
-    class RomLoader
+    class FontLoader
     {
-        public byte[] GetRomArray()
+        public byte[] GetFontArray()
         {
 
         }
