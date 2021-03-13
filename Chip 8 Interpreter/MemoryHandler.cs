@@ -1,7 +1,6 @@
-﻿using Interpreter.Core;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Interpreter.Memory
+namespace ChipSharp
 {
     class MemoryHandler
     {

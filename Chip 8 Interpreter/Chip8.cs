@@ -1,6 +1,4 @@
-﻿using Interpreter.Memory;
-
-namespace Interpreter.Core
+﻿namespace ChipSharp
 {
     class Chip8
     {

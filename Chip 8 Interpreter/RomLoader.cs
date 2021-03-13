@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Interpreter.Memory
+namespace ChipSharp
 {
     class RomLoader
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Interpreter.Core
+namespace ChipSharp
 {
     class FontLoader
     {

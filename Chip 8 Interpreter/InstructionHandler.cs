@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Interpreter.Display
+namespace ChipSharp
 {
-    class DisplayHandler
+    class InstructionHandler
     {
     }
 }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Interpreter.Timers
+namespace ChipSharp
 {
-    class SoundTimer : Timer
+    class Timer
     {
     }
 }
