@@ -23,7 +23,12 @@ namespace ChipSharp
             var fgColor = new Color(246, 192, 82, 255);
             var displayHandler = new DisplayHandler(width, height, resolutionMultiplier, bgColor, fgColor);
 
+            var byteTimer = new ByteTimer(60);
+            var soundTimer = new SoundTimer(60);
+            var instructionHandler = new InstructionHandler(displayHandler, memoryHandler, byteTimer, soundTimer);
+
             displayHandler.Start();
+            instructionHandler.Start();
         }
     }
 }

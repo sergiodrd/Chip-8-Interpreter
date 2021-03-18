@@ -39,11 +39,18 @@ namespace ChipSharp
             }
         }
 
-        public void SetPC(short location) => PC = memory[location];
-        public short ReadPC() { return memory[PC]; }
+        public void SetPC(short location)
+        {
+            PC = location;
+        }
 
-        public void SetI(short location) => I = memory[location];
-        public short ReadI() { return memory[I]; }
+        public byte ReadPC() { return memory[PC]; }
+        public void IncreasePC(short amount) => PC += amount;
+
+        public void SetI(short location) => I = location;
+
+        public byte ReadI() { return memory[I]; }
+        public void IncreaseI(short amount) => I += amount;
 
         public void PushPCToStack() => stack.Push(PC);
         public void PopStackToPC() => PC = stack.Pop();

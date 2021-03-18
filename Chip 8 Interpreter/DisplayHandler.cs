@@ -4,8 +4,8 @@ namespace ChipSharp
 {
     class DisplayHandler
     {
-        private int width;
-        private int height;
+        public int Width { get; private set; }
+        public int Height { get; private set; }
         private int resolutionMultiplier;
         private Color bgColor;
         private Color fgColor;
@@ -14,8 +14,8 @@ namespace ChipSharp
 
         public DisplayHandler(int width, int height, int resolutionMultiplier, Color bgColor, Color fgColor)
         {
-            this.width = width;
-            this.height = height;
+            Width = width;
+            Height = height;
             this.resolutionMultiplier = resolutionMultiplier;
             this.bgColor = bgColor;
             this.fgColor = fgColor;
@@ -25,7 +25,7 @@ namespace ChipSharp
 
         public void Start()
         {
-            Raylib.InitWindow(width * resolutionMultiplier, height * resolutionMultiplier, "Chip Sharp");
+            Raylib.InitWindow(Width * resolutionMultiplier, Height * resolutionMultiplier, "Chip Sharp");
         }
 
         public void Clear()
@@ -34,16 +34,34 @@ namespace ChipSharp
             {
                 for (int y = 0; y < grid.GetLength(1); y++) { grid[x, y] = false; }
             }
-            Raylib.ClearBackground(bgColor);
         }
 
-        public void FlipPixel(int a, int b)
+        public bool FlipPixel(int x, int y)
         {
-            grid[a, b] = !grid[a, b];
-            var x = a * resolutionMultiplier;
-            var y = b * resolutionMultiplier;
-            var color = grid[a, b] ? fgColor : bgColor;
-            Raylib.DrawRectangle(x, y, resolutionMultiplier, resolutionMultiplier, color);
+            grid[x, y] = !grid[x, y];
+            return grid[x, y];
         }
+
+        public void Render()
+        {
+            Raylib.BeginDrawing();
+            Raylib.ClearBackground(bgColor);
+
+            for(int a = 0; a < grid.GetLength(0); a++)
+            {
+                for(int b = 0; b < grid.GetLength(1); b++)
+                {
+                    var color = grid[a, b] ? fgColor : bgColor;
+                    var x = a * resolutionMultiplier;
+                    var y = b * resolutionMultiplier;
+                    Raylib.DrawRectangle(x, y, resolutionMultiplier, resolutionMultiplier, color);
+                }
+            }
+
+            Raylib.EndDrawing();
+        }
+
+        public bool WindowShouldClose() { return Raylib.WindowShouldClose(); }
+        public void CloseWindow() => Raylib.CloseWindow();
     }
 }
