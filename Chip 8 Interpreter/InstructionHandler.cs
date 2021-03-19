@@ -9,6 +9,8 @@ namespace ChipSharp
         private ByteTimer byteTimer;
         private SoundTimer soundTimer;
 
+        private InputHandler input = new InputHandler();
+
         private bool loopShouldRun;
         private HzTimer timer = new HzTimer(700);
 
@@ -268,7 +270,15 @@ namespace ChipSharp
                     break;
                 case 0xe:
                     {
-                        //Skip if key
+                        var key = (byte)((instruction & 0x0f00) >> 8);
+                        if((instruction & 0x00ff) == 0x9e)
+                        {
+                            if (input.isKeyDown(key)) memoryHandler.IncreasePC(2);
+                        }
+                        else if ((instruction & 0x00ff) == 0xa1)
+                        {
+                            if (!input.isKeyDown(key)) memoryHandler.IncreasePC(2);
+                        }
                     }
                     break;
                 case 0xf:
@@ -285,7 +295,13 @@ namespace ChipSharp
                                 break;
                             case 0x0a:
                                 {
-                                    //Get key
+                                    int a = 69;
+                                    for(byte i = 0; i <= 0xf; i++)
+                                    {
+                                        if (input.isKeyDown(i)) a = i;
+                                    }
+                                    if (a != 69) memoryHandler.SetVar(x, (byte)a);
+                                    else memoryHandler.IncreasePC(-2);
                                 }
                                 break;
                             case 0x15:
