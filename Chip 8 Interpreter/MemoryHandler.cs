@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ChipSharp
 {
@@ -57,5 +58,8 @@ namespace ChipSharp
 
         public void SetVar(byte var, byte val) => variables[var] = val;
         public byte ReadVar(byte var) { return variables[var]; }
+
+        public void StoreAtAddress(short location, byte val) => memory[location] = val;
+        public byte ReadAtAddress(short location) { return memory[location]; }
     }
 }
